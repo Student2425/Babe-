@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Mantusha</title>
+    <style>
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body, html { margin: 0; padding: 0; height: 100%; width: 100%; font-family: 'Georgia', serif; background-color: #fdfbf7; overflow: hidden; }
+        .page { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: opacity 0.8s ease-in-out; text-align: center; z-index: 1; }
+        .page.active { opacity: 1; visibility: visible; z-index: 10; }
+        img { max-width: 100%; max-height: 100vh; object-fit: contain; cursor: pointer; display: block; }
+        .dark-page { background: linear-gradient(135deg, #3a0000, #1a0000); color: #ffffff; }
+        .dark-page h1 { font-size: 2.2rem; margin-bottom: 50px; padding: 0 20px; line-height: 1.2; }
+        .button-container { display: flex; gap: 20px; justify-content: center; }
+        .btn { padding: 15px 40px; border-radius: 40px; font-size: 1.2rem; cursor: pointer; border: none; font-weight: bold; }
+        .btn-yes { background-color: #ffffff; color: #3a0000; }
+        .btn-no { background-color: transparent; color: #ffffff; border: 2px solid #ffffff; }
+        .tap-hint { position: absolute; bottom: 30px; color: rgba(100, 100, 100, 0.6); font-size: 0.9rem; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { opacity: 0.4; } 50% { opacity: 1; } 100% { opacity: 0.4; } }
+    </style>
+</head>
+<body>
+
+    <div id="page1" class="page active" onclick="goToPage('page2')">
+        <img src="page1_mantusha.jpg.png" alt="Mantusha">
+        <div class="tap-hint">Tap to continue</div>
+    </div>
+
+    <div id="page2" class="page dark-page">
+        <h1>I wanted to show you something</h1>
+        <div class="button-container">
+            <button class="btn btn-yes" onclick="event.stopPropagation(); goToPage('page4')">YES</button>
+            <button class="btn btn-no" onclick="event.stopPropagation(); goToPage('page3')">NO</button>
+        </div>
+    </div>
+
+    <div id="page3" class="page dark-page">
+        <h1>Ese kese naie dekhoge hum toh dikha kea rahenge jao jaldi dekho</h1>
+        <div class="button-container">
+            <button class="btn btn-yes" onclick="event.stopPropagation(); goToPage('page2')">Return</button>
+        </div>
+    </div>
+
+    <div id="page4" class="page" onclick="goToPage('page5')">
+        <img src="page4_envelope.jpg.png" alt="Envelope">
+        <div class="tap-hint">Tap the envelope</div>
+    </div>
+
+    <div id="page5" class="page" onclick="goToPage('page6')">
+        <img src="page5_letter.jpg.png" alt="Letter">
+        <div class="tap-hint">Tap to continue</div>
+    </div>
+
+    <div id="page6" class="page" onclick="goToPage('page7')">
+        <img src="page6_heart.jpg.png" alt="Heart">
+        <div class="tap-hint">One last thing...</div>
+    </div>
+
+    <div id="page7" class="page">
+        <img src="page7_rose.jpg.png" alt="Rose">
+    </div>
+
+    <script>
+        function goToPage(targetPageId) {
+            const currentActive = document.querySelector('.page.active');
+            const targetPage = document.getElementById(targetPageId);
+            if (currentActive && targetPage) {
+                currentActive.classList.remove('active');
+                targetPage.classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>
